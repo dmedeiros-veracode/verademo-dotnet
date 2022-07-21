@@ -30,5 +30,33 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-
+          
+  security_analysis:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v3.0.0
+        with:
+          # Artifact name
+          name: .net-app
+          # Destination path
+          path:  ${{env.DOTNET_ROOT}}/myapp
+          
+      - name: GitHub Script
+        uses: actions/github-script@v6.1.0
+        with:
+          # The script to run
+          script: 
+            dir
+          # The GitHub token used to create an authenticated client
+          #github-token: # optional, default is ${{ github.token }}
+          # Whether to tell the GitHub client to log details of its requests
+          #debug: # optional
+          # An optional user-agent string
+          #user-agent: # optional, default is actions/github-script
+          # A comma-separated list of API previews to accept
+          #previews: # optional
+          # Either "string" or "json" (default "json")—how the result will be encoded
+          #result-encoding: # optional, default is json
  
